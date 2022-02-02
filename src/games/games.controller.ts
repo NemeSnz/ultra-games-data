@@ -1,7 +1,16 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put } from '@nestjs/common';
-import {PublisherModel} from 'src/publishers/publishers.interface';
-import {GameModel} from './games.interface';
-import {GamesService} from './games.service';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  ParseIntPipe,
+  Post,
+  Put,
+} from '@nestjs/common';
+import { PublisherModel } from 'src/publishers/publishers.interface';
+import { GameModel } from './games.interface';
+import { GamesService } from './games.service';
 
 @Controller('games')
 export class GamesController {
@@ -11,7 +20,7 @@ export class GamesController {
   public findAll(): Array<GameModel> {
     return this.gamesService.findAll();
   }
-  
+
   @Get(':id')
   public findOne(@Param('id', ParseIntPipe) id: number): GameModel {
     return this.gamesService.findOne(id);
@@ -28,13 +37,15 @@ export class GamesController {
   }
 
   @Delete(':id')
-  public delete(@Param('id', ParseIntPipe) id: number): void {  
+  public delete(@Param('id', ParseIntPipe) id: number): void {
     this.gamesService.delete(id);
   }
 
   @Put(':id')
-  public update(@Param('id', ParseIntPipe) id: number, @Body() game: GameModel): GameModel {
+  public update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() game: GameModel,
+  ): GameModel {
     return this.gamesService.update(id, game);
   }
-
 }

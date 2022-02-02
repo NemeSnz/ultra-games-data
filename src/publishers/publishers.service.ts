@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import {PublisherModel} from './publishers.interface';
+import { PublisherModel } from './publishers.interface';
 
 @Injectable()
 export class PublishersService {
@@ -15,7 +15,7 @@ export class PublishersService {
   public findOne(id: number): PublisherModel {
     const publisher = this.publishers.find((item) => item.id === id);
 
-    if(!publisher) {
+    if (!publisher) {
       throw new NotFoundException();
     }
 
