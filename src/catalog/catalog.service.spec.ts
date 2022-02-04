@@ -94,8 +94,17 @@ describe('CatalogService', () => {
     await catalogService.discountOldGames();
 
     expect(updateSpy).toHaveBeenCalledTimes(3);
-    expect(updateSpy).toHaveBeenNthCalledWith(1, 0, {...mockedGames[0], price: 72.79});
-    expect(updateSpy).toHaveBeenNthCalledWith(2, 2, {...mockedGames[2], price: 80});
-    expect(updateSpy).toHaveBeenNthCalledWith(3, 4, {...mockedGames[4], price: 40});
-  })
+    expect(updateSpy).toHaveBeenNthCalledWith(1, 0, {
+      ...mockedGames[0],
+      price: 72.79,
+    });
+    expect(updateSpy).toHaveBeenNthCalledWith(2, 2, {
+      ...mockedGames[2],
+      price: 80,
+    });
+    expect(updateSpy).toHaveBeenNthCalledWith(3, 4, {
+      ...mockedGames[4],
+      price: 40,
+    });
+  });
 });

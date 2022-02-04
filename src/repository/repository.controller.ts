@@ -8,7 +8,7 @@ import {
   Put,
 } from '@nestjs/common';
 import { DeepPartial, DeleteResult, UpdateResult } from 'typeorm';
-import { RepositoryService } from './repository-service.service';
+import { RepositoryService } from './repository.service';
 import { BaseEntity } from './repository.entity';
 
 export class RepositoryController<T extends BaseEntity> {
