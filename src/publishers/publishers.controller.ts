@@ -1,5 +1,5 @@
 import { Controller } from '@nestjs/common';
-import { RepositoryController } from 'src/repository/repository-controller.controller';
+import { RepositoryController } from '../repository/repository-controller.controller';
 import { Publisher } from './publishers.entity';
 import { PublishersService } from './publishers.service';
 

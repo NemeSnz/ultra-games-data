@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Publisher } from 'src/publishers/publishers.entity';
-import { RepositoryService } from 'src/repository/repository-service.service';
+import { Publisher } from '../publishers/publishers.entity';
+import { RepositoryService } from '../repository/repository-service.service';
 import { DeepPartial, Repository } from 'typeorm';
 import { Game } from './games.entity';
 

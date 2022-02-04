@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import moment from 'moment';
-import { Game } from 'src/games/games.entity';
-import { GamesService } from 'src/games/games.service';
+import * as moment from 'moment';
+import { Game } from '../games/games.entity';
+import { GamesService } from '../games/games.service';
 
 @Injectable()
 export class CatalogService {
@@ -24,14 +24,14 @@ export class CatalogService {
 
     const gamesToDiscount = games.filter(({ releaseDate }) =>
       moment(releaseDate).isBetween(
-        moment().subtract(8, 'month'),
+        moment().subtract(18, 'month'),
         moment().subtract(12, 'month'),
       ),
     );
 
     const discountedGames = gamesToDiscount.map((game) => ({
       ...game,
-      price: game.price * 0.8,
+      price: Number((game.price * 0.8).toFixed(2)),
     }));
 
     discountedGames.forEach((game) => this.gamesService.update(game.id, game));

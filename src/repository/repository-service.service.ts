@@ -12,7 +12,7 @@ export class RepositoryService<T extends BaseEntity> {
 
   public async findOne(id: number): Promise<T> {
     const entity = await this.repository.findOne(id);
-    if(!entity) {
+    if (!entity) {
       throw new NotFoundException(`Entity not found with id = ${id}`);
     }
     return entity;
@@ -26,9 +26,12 @@ export class RepositoryService<T extends BaseEntity> {
     return this.repository.delete(id);
   }
 
-  public async update(id: number, entity: DeepPartial<T>): Promise<UpdateResult> {
-    const exists = await this.repository.findOne(id) !== undefined;
-    if(!exists) {
+  public async update(
+    id: number,
+    entity: DeepPartial<T>,
+  ): Promise<UpdateResult> {
+    const exists = (await this.repository.findOne(id)) !== undefined;
+    if (!exists) {
       throw new NotFoundException(`Entity not found with id = ${id}`);
     }
     return this.repository.update(id, entity);

@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { GamesService } from './games.service';
 import { GamesController } from './games.controller';
-import { PublishersModule } from 'src/publishers/publishers.module';
+import { PublishersModule } from '../publishers/publishers.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Game } from './games.entity';
 

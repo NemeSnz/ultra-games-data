@@ -9,7 +9,7 @@ import {
 import { Publisher } from '../publishers/publishers.entity';
 import { Game } from './games.entity';
 import { GamesService } from './games.service';
-import { RepositoryController } from 'src/repository/repository-controller.controller';
+import { RepositoryController } from '../repository/repository-controller.controller';
 
 @Controller('games')
 export class GamesController extends RepositoryController<Game> {

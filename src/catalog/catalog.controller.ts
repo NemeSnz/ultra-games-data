@@ -1,5 +1,5 @@
 import { Controller, Put } from '@nestjs/common';
-import { Game } from 'src/games/games.entity';
+import { Game } from '../games/games.entity';
 import { CatalogService } from './catalog.service';
 
 @Controller('catalog')
