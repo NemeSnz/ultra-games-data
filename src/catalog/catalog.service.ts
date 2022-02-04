@@ -1,14 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import moment from 'moment';
-import { GameModel } from 'src/games/games.interface';
+import { Game } from 'src/games/games.entity';
 import { GamesService } from 'src/games/games.service';
 
 @Injectable()
 export class CatalogService {
   constructor(private readonly gamesService: GamesService) {}
 
-  removeOldGames(): GameModel[] {
-    const games = this.gamesService.findAll();
+  public async removeOldGames(): Promise<Game[]> {
+    const games = await this.gamesService.findAll();
 
     const gamesToRemove = games.filter(({ releaseDate }) =>
       moment(releaseDate).isBefore(moment().subtract(18, 'month')),
@@ -19,8 +19,8 @@ export class CatalogService {
     return gamesToRemove;
   }
 
-  discountOldGames(): GameModel[] {
-    const games = this.gamesService.findAll();
+  public async discountOldGames(): Promise<Game[]> {
+    const games = await this.gamesService.findAll();
 
     const gamesToDiscount = games.filter(({ releaseDate }) =>
       moment(releaseDate).isBetween(

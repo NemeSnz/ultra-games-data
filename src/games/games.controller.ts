@@ -1,51 +1,31 @@
 import {
   Body,
   Controller,
-  Delete,
   Get,
   Param,
   ParseIntPipe,
   Post,
-  Put,
 } from '@nestjs/common';
-import { PublisherModel } from 'src/publishers/publishers.interface';
-import { GameModel } from './games.interface';
+import { Publisher } from '../publishers/publishers.entity';
+import { Game } from './games.entity';
 import { GamesService } from './games.service';
+import { RepositoryController } from 'src/repository/repository-controller.controller';
 
 @Controller('games')
-export class GamesController {
-  constructor(private readonly gamesService: GamesService) {}
-
-  @Get()
-  public findAll(): Array<GameModel> {
-    return this.gamesService.findAll();
-  }
-
-  @Get(':id')
-  public findOne(@Param('id', ParseIntPipe) id: number): GameModel {
-    return this.gamesService.findOne(id);
+export class GamesController extends RepositoryController<Game> {
+  constructor(private readonly gamesService: GamesService) {
+    super(gamesService);
   }
 
   @Get(':id/publisher')
-  public findPublisher(@Param('id', ParseIntPipe) id: number): PublisherModel {
+  public async findPublisher(
+    @Param('id', ParseIntPipe) id: number,
+  ): Promise<Publisher> {
     return this.gamesService.findPublisher(id);
   }
 
   @Post()
-  public create(@Body() game: GameModel): GameModel {
+  public create(@Body() game: { publisherId: string } & Game): Promise<Game> {
     return this.gamesService.create(game);
-  }
-
-  @Delete(':id')
-  public delete(@Param('id', ParseIntPipe) id: number): void {
-    this.gamesService.delete(id);
-  }
-
-  @Put(':id')
-  public update(
-    @Param('id', ParseIntPipe) id: number,
-    @Body() game: GameModel,
-  ): GameModel {
-    return this.gamesService.update(id, game);
   }
 }

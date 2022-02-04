@@ -1,24 +1,15 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { PublisherModel } from './publishers.interface';
+import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { RepositoryService } from 'src/repository/repository-service.service';
+import { Repository } from 'typeorm';
+import { Publisher } from './publishers.entity';
 
 @Injectable()
-export class PublishersService {
-  private publishers: Array<PublisherModel> = [
-    {
-      id: 1,
-      name: 'Ultra Publishing',
-      siret: 246,
-      phone: '555-555-5555',
-    },
-  ];
-
-  public findOne(id: number): PublisherModel {
-    const publisher = this.publishers.find((item) => item.id === id);
-
-    if (!publisher) {
-      throw new NotFoundException();
-    }
-
-    return publisher;
+export class PublishersService extends RepositoryService<Publisher> {
+  constructor(
+    @InjectRepository(Publisher)
+    publishersRepository: Repository<Publisher>,
+  ) {
+    super(publishersRepository);
   }
 }
