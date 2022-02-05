@@ -17,10 +17,13 @@ export class GamesService extends RepositoryService<Game> {
   }
 
   public async findPublisher(id: number): Promise<Publisher> {
-    const { publisher } = await this.gamesRepository.findOne(id, {
+    const game = await this.gamesRepository.findOne(id, {
       relations: ['publisher'],
     });
-    return publisher;
+    if (!game) {
+      throw new NotFoundException();
+    }
+    return game.publisher;
   }
 
   public async create({

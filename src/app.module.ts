@@ -6,13 +6,13 @@ import { Game } from './games/games.entity';
 import { Publisher } from './publishers/publishers.entity';
 import { PublishersModule } from './publishers/publishers.module';
 
-// const DB_PATH = '/usr/local/sqlite/db.sqlite';
-const DB_PATH = 'db.sqlite';
+const DB_PATH = process.env.DB_PATH || 'db.sqlite';
+
 @Module({
   imports: [
     TypeOrmModule.forRoot({
       type: 'sqlite',
-      database: DB_PATH,
+      database: process.env.NODE_ENV === 'test' ? ':memory:' : DB_PATH,
       entities: [Game, Publisher],
       synchronize: true,
     }),
